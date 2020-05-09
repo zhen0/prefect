@@ -30,6 +30,7 @@ class WriteAirtableRow(Task):
         base_key: str = None,
         table_name: str = None,
         api_key: str = None,
+        fields: str = None
     ) -> dict:
         """
         Inserts data into an Airtable table
@@ -40,9 +41,10 @@ class WriteAirtableRow(Task):
             - base_key (str): the Airtable base key
             - table_name (str): the table name
             - api_key (str): an Airtable API key. This can be provided via a Prefect Secret
+            - fields(str): field name
 
         Returns:
             - a dictionary containing information about the successful insert
         """
-        table = airtable.Airtable(base_key, table_name, api_key)
+        table = airtable.Airtable(base_key, table_name, api_key, fields)
         return table.insert(data)
